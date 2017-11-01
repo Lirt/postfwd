@@ -16,6 +16,24 @@ After that you can run or stop postfwd using systemd, init or script `/etc/init.
 
 To change default arguments with which postfwd is run, edit file `/etc/default/postfwd`.
 
+### Docker
+
+You have 2 options:
+
+1. Pull Postfwd Docker from DockerHub using `docker pull postfwd/postfwd`.
+2. Build it locally using `docker build docker/` from root directory of this git repository.
+
+After that, you can prepare configuration file `postfwd.cf` and run Docker container with volume path pointing to host directory with your configuration file.
+
+For example, if you have configuration `postfwd.cf` on host in directory `/opt/postfwd/` and want to expose container port `10040` on host port `10040`, run Postfwd Docker with command:
+
+```bash
+docker run -d \
+    -p 10040:10040 \
+    -v /opt/postfwd/:/etc/postfwd/ \
+    postfwd/postfwd
+```
+
 ### Manual installation
 
 Clone this repository and copy `postfwd2` from directory `./sbin` to your PATH environment (eg. /usr/sbin/).
